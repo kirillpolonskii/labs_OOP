@@ -14,22 +14,22 @@ int main() {
     Octagon oct2(points);
     Octagon oct3(std::cin);
     Octagon* copiedOct = new Octagon(oct2);
-    oct1.print(std::cout);
-    std::cout << "His area is " << oct1.area() << "\n";
-    oct2.print(std::cout);
-    std::cout << "His area is " << oct2.area() << "\n";
-    oct3.print(std::cout);
-    std::cout << "His area is " << oct3.area() << "\n";
-    copiedOct->print(std::cout);
-    std::cout << "His area is " << copiedOct->area() << "\n";
+    oct1.Print(std::cout);
+    std::cout << "His Area is " << oct1.Area() << "\n";
+    oct2.Print(std::cout);
+    std::cout << "His Area is " << oct2.Area() << "\n";
+    oct3.Print(std::cout);
+    std::cout << "His Area is " << oct3.Area() << "\n";
+    copiedOct->Print(std::cout);
+    std::cout << "His Area is " << copiedOct->Area() << "\n";
 
     Triangle tr1(std::cin);
-    tr1.print(std::cout);
-    std::cout << "His area is " << tr1.area() << "\n";
+    tr1.Print(std::cout);
+    std::cout << "His Area is " << tr1.Area() << "\n";
 
     Square sq1(std::cin);
-    sq1.print(std::cout);
-    std::cout << "His area is " << sq1.area() << "\n";
+    sq1.Print(std::cout);
+    std::cout << "His Area is " << sq1.Area() << "\n";
 
 
     return 0;

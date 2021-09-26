@@ -4,9 +4,9 @@
 #include "point.h"
 
 class Figure {
-    virtual void print(std::ostream& os) = 0;
-    virtual double area() = 0;
-    virtual int getVertexesNumber() = 0;
+    virtual void Print(std::ostream& os) = 0;
+    virtual double Area() = 0;
+    virtual int VerticesNumber() = 0;
 };
 
 #endif

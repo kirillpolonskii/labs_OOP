@@ -12,8 +12,8 @@ public:
     Square(std::vector<Point> points);
     Square(std::istream& is);
     Square(const Square& otherSquare);
-    void print(std::ostream& os);
-    double area();
-    int getVertexesNumber();
+    void Print(std::ostream& os);
+    double Area();
+    int VerticesNumber();
 };
 #endif //LAB1_SQUARE_H

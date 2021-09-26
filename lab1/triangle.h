@@ -11,9 +11,9 @@ public:
     Triangle(std::vector<Point> points);
     Triangle(std::istream& is);
     Triangle(const Triangle& otherTriangle);
-    void print(std::ostream& os);
-    double area();
-    int getVertexesNumber();
+    void Print(std::ostream& os);
+    double Area();
+    int VerticesNumber();
 };
 
 #endif //LAB1_TRIANGLE_H

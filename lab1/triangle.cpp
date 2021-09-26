@@ -28,7 +28,7 @@ Triangle::Triangle(const Triangle& otherTriangle) : Triangle(otherTriangle.point
     }
 }
 
-void Triangle::print(std::ostream& os){
+void Triangle::Print(std::ostream& os){
     os << "Triangle: ";
     for (int i = 0; i < 3; ++i){
         os << points[i] << ' ';
@@ -36,7 +36,7 @@ void Triangle::print(std::ostream& os){
     os << std::endl;
 }
 
-double Triangle::area() {
+double Triangle::Area() {
     double a = points[0].dist(points[1]);
     double b = points[1].dist(points[2]);
     double c = points[0].dist(points[2]);
@@ -46,6 +46,6 @@ double Triangle::area() {
     return s;
 }
 
-int Triangle::getVertexesNumber() {
+int Triangle::VerticesNumber() {
     return 3;
 }

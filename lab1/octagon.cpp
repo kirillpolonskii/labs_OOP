@@ -30,7 +30,7 @@ Octagon::Octagon(const Octagon& otherOct) : Octagon(otherOct.points){
     }
 }
 
-void Octagon::print(std::ostream& os){
+void Octagon::Print(std::ostream& os){
     os << "Octagon: ";
     for (int i = 0; i < 8; ++i){
         os << points[i] << ' ';
@@ -49,7 +49,7 @@ double Octagon::triangleArea(Point p1, Point p2, Point p3) {
     return s;
 }
 
-double Octagon::area() {
+double Octagon::Area() {
     double s = 0.0;
     for (int i = 1; i < 7; ++i){
         s += Octagon::triangleArea(points[0], points[i], points[i + 1]);
@@ -57,6 +57,6 @@ double Octagon::area() {
     return s;
 }
 
-int Octagon::getVertexesNumber() {
+int Octagon::VerticesNumber() {
     return 8;
 }

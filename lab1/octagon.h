@@ -12,10 +12,10 @@ public:
     Octagon(std::vector<Point> points);
     Octagon(std::istream& is);
     Octagon(const Octagon& otherOct);
-    void print(std::ostream& os);
-    double area();
+    void Print(std::ostream& os);
+    double Area();
     double triangleArea(Point p1, Point p2, Point p3);
-    int getVertexesNumber();
+    int VerticesNumber();
 };
 
 #endif //LAB1_OCTAGON_H

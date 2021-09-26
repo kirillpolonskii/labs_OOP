@@ -28,7 +28,7 @@ Square::Square(const Square& otherSquare) : Square(otherSquare.points){
     }
 }
 
-void Square::print(std::ostream& os){
+void Square::Print(std::ostream& os){
     os << "Square: ";
     for (int i = 0; i < 4; ++i){
         os << points[i] << ' ';
@@ -36,13 +36,13 @@ void Square::print(std::ostream& os){
     os << std::endl;
 }
 
-double Square::area() {
+double Square::Area() {
     double a = points[0].dist(points[1]);
     double s = a * a;
     //std::cout << s << std::endl;
     return s;
 }
 
-int Square::getVertexesNumber() {
+int Square::VerticesNumber() {
     return 4;
 }
