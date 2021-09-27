@@ -50,4 +50,6 @@ int Triangle::VertexesNumber() {
     return 3;
 }
 
-Triangle::~Triangle() {}
+Triangle::~Triangle() {
+    std::cout << "Triangle was deleted" << std::endl;
+}

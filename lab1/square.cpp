@@ -47,4 +47,4 @@ int Square::VertexesNumber() {
     return 4;
 }
 
-Square::~Square() {}
+Square::~Square() {std::cout << "Square was deleted" << std::endl;}

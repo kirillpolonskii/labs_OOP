@@ -16,7 +16,7 @@ public:
     double Area();
     double triangleArea(Point p1, Point p2, Point p3);
     int VertexesNumber();
-    ~Octagon();
+    virtual ~Octagon();
 };
 
 #endif //LAB1_OCTAGON_H

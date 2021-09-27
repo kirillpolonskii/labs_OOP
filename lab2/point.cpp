@@ -2,7 +2,7 @@
 
 
 std::ostream& operator << (std::ostream& os, Point& point) {
-    os << "("  << point.x << ", " << point.y << ")";
+    os << "(" << std::setprecision(1) << point.x << ", " << point.y << ")";
     return os;
 }
 std::istream& operator >> (std::istream& is, Point& point){

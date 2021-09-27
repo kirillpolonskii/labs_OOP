@@ -15,6 +15,6 @@ public:
     void Print(std::ostream& os);
     double Area();
     int VertexesNumber();
-    ~Square();
+    virtual ~Square();
 };
 #endif //LAB1_SQUARE_H

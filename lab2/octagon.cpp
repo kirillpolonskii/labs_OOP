@@ -1,12 +1,19 @@
 #include "octagon.h"
-#include <iostream>
-
 
 Octagon::Octagon(){
     //std::cout << "Empty constructor was called\n";
     //std::cout << "-----" << std::endl;
     const Point p(0.0, 0.0);
     points.assign(8, p);
+}
+
+std::istream& operator >> (std::istream& is, Octagon& oct){
+    //const Point p(0.0, 0.0);
+    //points.assign(8, p);
+    std::cout << "Enter the coordinates of octagon: " << std::endl;
+    for (int i = 0; i < 8; ++i){
+        is >> oct.points[i];
+    }
 }
 
 Octagon::Octagon(std::vector<Point> points) : Octagon(){
@@ -17,12 +24,7 @@ Octagon::Octagon(std::vector<Point> points) : Octagon(){
     }
 }
 
-Octagon::Octagon(std::istream& is) : Octagon(){
-    std::cout << "Enter the coordinates of octagon: " << std::endl;
-    for (int i = 0; i < 8; ++i){
-        is >> points[i];
-    }
-}
+
 
 Octagon::Octagon(const Octagon& otherOct) : Octagon(otherOct.points){
     for (int i = 0; i < 8; ++i){
@@ -30,13 +32,12 @@ Octagon::Octagon(const Octagon& otherOct) : Octagon(otherOct.points){
     }
 }
 
-void Octagon::Print(std::ostream& os){
+std::ostream& operator << (std::ostream& os, Octagon& oct){
     os << "Octagon: ";
     for (int i = 0; i < 8; ++i){
-        os << points[i] << ' ';
+        os << oct.points[i] << ' ';
     }
     os << std::endl;
-
 }
 
 double Octagon::triangleArea(Point p1, Point p2, Point p3) {
@@ -58,7 +59,7 @@ double Octagon::Area() {
 }
 
 int Octagon::VertexesNumber() {
-    return 8;
+    return Octagon::VERTICES_NUM;
 }
 
-Octagon::~Octagon() {std::cout << "Octagon was deleted" << std::endl;}
+Octagon::~Octagon() {}
