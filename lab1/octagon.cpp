@@ -57,6 +57,6 @@ double Octagon::Area() {
     return s;
 }
 
-int Octagon::VerticesNumber() {
+int Octagon::VertexesNumber() {
     return 8;
 }

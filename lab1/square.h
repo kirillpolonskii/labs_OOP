@@ -14,6 +14,6 @@ public:
     Square(const Square& otherSquare);
     void Print(std::ostream& os);
     double Area();
-    int VerticesNumber();
+    int VertexesNumber();
 };
 #endif //LAB1_SQUARE_H

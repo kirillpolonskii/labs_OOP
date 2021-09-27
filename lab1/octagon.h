@@ -15,7 +15,7 @@ public:
     void Print(std::ostream& os);
     double Area();
     double triangleArea(Point p1, Point p2, Point p3);
-    int VerticesNumber();
+    int VertexesNumber();
 };
 
 #endif //LAB1_OCTAGON_H

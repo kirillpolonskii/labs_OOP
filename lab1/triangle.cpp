@@ -46,6 +46,6 @@ double Triangle::Area() {
     return s;
 }
 
-int Triangle::VerticesNumber() {
+int Triangle::VertexesNumber() {
     return 3;
 }

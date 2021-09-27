@@ -13,7 +13,7 @@ public:
     Triangle(const Triangle& otherTriangle);
     void Print(std::ostream& os);
     double Area();
-    int VerticesNumber();
+    int VertexesNumber();
 };
 
 #endif //LAB1_TRIANGLE_H

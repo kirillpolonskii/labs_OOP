@@ -43,6 +43,6 @@ double Square::Area() {
     return s;
 }
 
-int Square::VerticesNumber() {
+int Square::VertexesNumber() {
     return 4;
 }
