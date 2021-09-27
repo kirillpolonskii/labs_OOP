@@ -46,3 +46,5 @@ double Square::Area() {
 int Square::VertexesNumber() {
     return 4;
 }
+
+Square::~Square() {}

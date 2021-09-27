@@ -60,3 +60,5 @@ double Octagon::Area() {
 int Octagon::VertexesNumber() {
     return 8;
 }
+
+Octagon::~Octagon() {}

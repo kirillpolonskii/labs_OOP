@@ -49,3 +49,5 @@ double Triangle::Area() {
 int Triangle::VertexesNumber() {
     return 3;
 }
+
+Triangle::~Triangle() {}

@@ -14,6 +14,7 @@ public:
     void Print(std::ostream& os);
     double Area();
     int VertexesNumber();
+    ~Triangle();
 };
 
 #endif //LAB1_TRIANGLE_H
