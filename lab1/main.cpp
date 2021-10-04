@@ -31,6 +31,5 @@ int main() {
     sq1.Print(std::cout);
     std::cout << "His Area is " << sq1.Area() << "\n";
 
-
     return 0;
 }

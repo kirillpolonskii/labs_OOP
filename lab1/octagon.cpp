@@ -1,17 +1,12 @@
 #include "octagon.h"
 #include <iostream>
 
-
 Octagon::Octagon(){
-    //std::cout << "Empty constructor was called\n";
-    //std::cout << "-----" << std::endl;
     const Point p(0.0, 0.0);
     points.assign(8, p);
 }
 
 Octagon::Octagon(std::vector<Point> points) : Octagon(){
-    //const Point p(0.0, 0.0);
-    //points.assign(8, p);
     for (int i = 0; i < 8; ++i){
         this->points[i] = points[i];
     }
@@ -45,7 +40,6 @@ double Octagon::triangleArea(Point p1, Point p2, Point p3) {
     double c = p1.dist(p3);
     double p = (a + b + c) / 2.0;
     double s = sqrt(p * (p - a) * (p - b) * (p - c));
-    //std::cout << s << std::endl;
     return s;
 }
 

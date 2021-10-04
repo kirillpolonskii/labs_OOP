@@ -1,6 +1,5 @@
 #include "point.h"
 
-
 std::ostream& operator << (std::ostream& os, Point& point) {
     os << "("  << point.x << ", " << point.y << ")";
     return os;

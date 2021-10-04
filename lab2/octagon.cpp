@@ -1,19 +1,23 @@
 #include "octagon.h"
-
+// перед написанием контейнера протестирую каждую функцию
+// tested
 Octagon::Octagon(){
-    //std::cout << "Empty constructor was called\n";
-    //std::cout << "-----" << std::endl;
+    std::cout << "Empty constructor was called\n";
+    std::cout << "-----" << std::endl;
     const Point p(0.0, 0.0);
-    points.assign(8, p);
+    this->points.assign(8, p);
+    this->area = 0;
 }
 
 std::istream& operator >> (std::istream& is, Octagon& oct){
-    //const Point p(0.0, 0.0);
-    //points.assign(8, p);
+    const Point p(0.0, 0.0);
+    oct.points.assign(8, p);
     std::cout << "Enter the coordinates of octagon: " << std::endl;
     for (int i = 0; i < 8; ++i){
         is >> oct.points[i];
     }
+    std::cout << "Out of >>\n";
+    return is;
 }
 
 Octagon::Octagon(std::vector<Point> points) : Octagon(){
@@ -22,22 +26,23 @@ Octagon::Octagon(std::vector<Point> points) : Octagon(){
     for (int i = 0; i < 8; ++i){
         this->points[i] = points[i];
     }
-}
-
-
-
-Octagon::Octagon(const Octagon& otherOct) : Octagon(otherOct.points){
-    for (int i = 0; i < 8; ++i){
-        this->points[i] = otherOct.points[i];
+    for (int i = 1; i < 7; ++i){
+        this->area += Octagon::triangleArea(points[0], points[i], points[i + 1]);
     }
 }
 
 std::ostream& operator << (std::ostream& os, Octagon& oct){
+    os << "Enter in << \n";
     os << "Octagon: ";
     for (int i = 0; i < 8; ++i){
         os << oct.points[i] << ' ';
     }
     os << std::endl;
+    return os;
+}
+
+bool operator == (Octagon& oct1, Octagon& oct2){
+    return oct1.area == oct2.area;
 }
 
 double Octagon::triangleArea(Point p1, Point p2, Point p3) {
