@@ -18,6 +18,8 @@ public:
     void SetLeft(TBinaryTreeItem* tBinTreeItem);
     TBinaryTreeItem* GetRight();
     void SetRight(TBinaryTreeItem* tBinTreeItem);
+    //double GetArea();
+    void IncCounter();
     virtual ~TBinaryTreeItem();
 
 };

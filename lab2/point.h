@@ -17,6 +17,7 @@ public:
 
     friend std::istream& operator >> (std::istream& is, Point& point);
     friend std::ostream& operator << (std::ostream& os, Point& point);
+    friend bool operator == (Point& p1, Point& p2);
 
 };
 

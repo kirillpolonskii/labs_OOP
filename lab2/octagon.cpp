@@ -42,7 +42,12 @@ std::ostream& operator << (std::ostream& os, Octagon& oct){
 }
 
 bool operator == (Octagon& oct1, Octagon& oct2){
-    return oct1.area == oct2.area;
+    for (int i = 0; i < Octagon::VERTICES_NUM; ++i){
+        if (!(oct1.points[i] == oct2.points[i])){
+            return false;
+        }
+    }
+    return true;
 }
 
 double Octagon::triangleArea(Point p1, Point p2, Point p3) {
@@ -65,6 +70,10 @@ double Octagon::Area() {
 
 int Octagon::VertexesNumber() {
     return Octagon::VERTICES_NUM;
+}
+
+double Octagon::GetArea() {
+    return area;
 }
 
 Octagon::~Octagon() {}

@@ -25,11 +25,12 @@ public:
     }
     friend bool operator == (Octagon& oct1, Octagon& oct2);
     double Area();
+    double GetArea();
     double triangleArea(Point p1, Point p2, Point p3);
     int VertexesNumber();
     ~Octagon();
 
-    static const int VERTICES_NUM = 3;
+    static const int VERTICES_NUM = 8;
 };
 
 #endif //LAB2_OCTAGON_H
