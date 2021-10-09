@@ -16,7 +16,7 @@ std::istream& operator >> (std::istream& is, Octagon& oct){
     for (int i = 0; i < 8; ++i){
         is >> oct.points[i];
     }
-    std::cout << "Out of >>\n";
+    //std::cout << "Out of >>\n";
     return is;
 }
 
@@ -32,7 +32,7 @@ Octagon::Octagon(std::vector<Point> points) : Octagon(){
 }
 
 std::ostream& operator << (std::ostream& os, Octagon& oct){
-    os << "Enter in << \n";
+    //os << "Enter in << \n";
     os << "Octagon: ";
     for (int i = 0; i < 8; ++i){
         os << oct.points[i] << ' ';

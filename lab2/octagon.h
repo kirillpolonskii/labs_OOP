@@ -11,10 +11,9 @@ private:
 public:
     Octagon();
     Octagon(std::vector<Point> points);
-    Octagon(const Octagon& otherOct);
-    friend std::ostream& operator << (std::ostream& os, Octagon& oct);
-    friend std::istream& operator >> (std::istream& is, Octagon& oct);
-    Octagon& operator= (const Octagon& copiedOct){
+    friend std::ostream& operator << (std::ostream& os, Octagon& oct); // checked
+    friend std::istream& operator >> (std::istream& is, Octagon& oct); // checked
+    Octagon& operator= (const Octagon& copiedOct){ // checked
         for (int i = 0; i < 8; ++i){
             this->points[i] = copiedOct.points[i];
         }
@@ -23,7 +22,7 @@ public:
         }
         return *this;
     }
-    friend bool operator == (Octagon& oct1, Octagon& oct2);
+    friend bool operator == (Octagon& oct1, Octagon& oct2); // checked
     double Area();
     double GetArea();
     double triangleArea(Point p1, Point p2, Point p3);

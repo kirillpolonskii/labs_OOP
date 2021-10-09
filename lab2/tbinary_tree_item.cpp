@@ -28,6 +28,8 @@ TBinaryTreeItem* TBinaryTreeItem::GetLeft() {
     if (this != nullptr){
         return this->left;
     }
+    else
+        return nullptr;
 }
 
 void TBinaryTreeItem::SetLeft(TBinaryTreeItem* tBinTreeItem) {
@@ -40,6 +42,8 @@ TBinaryTreeItem* TBinaryTreeItem::GetRight() {
     if (this != nullptr){
         return this->right;
     }
+    else
+        return nullptr;
 }
 
 void TBinaryTreeItem::SetRight(TBinaryTreeItem* tBinTreeItem) {
@@ -61,6 +65,7 @@ void TBinaryTreeItem::IncCounter() {
 }
 
 TBinaryTreeItem::~TBinaryTreeItem() {
-    delete this->left;
-    delete this->right;
+    //delete this->left;
+    //delete this->right;
+    std::cout << "Destructor TBinaryTreeItem was called\n";
 }

@@ -13,7 +13,8 @@ public:
     void Pop(Octagon& oct);
     void Clear();
     bool Empty();
-    double Count(double minArea, double maxArea);
+    int  Count(double minArea, double maxArea);
+    //void reverseCount(double minArea, double maxAre, TBinaryTreeItem* curItem, int& ans);
     virtual ~TBinaryTree();
     
 };
