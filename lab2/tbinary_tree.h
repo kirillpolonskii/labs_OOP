@@ -8,13 +8,14 @@ private:
     TBinaryTreeItem* root;
 public:
     TBinaryTree();
-    TBinaryTree(const TBinaryTree& otherBinTree);
-    void Push(Octagon& oct);
-    void Pop(Octagon& oct);
+    TBinaryTree(TBinaryTree& otherBinTree);
+    void Push(const Octagon& oct);
+    void Pop(const Octagon& oct);
     void Clear();
     bool Empty();
     int  Count(double minArea, double maxArea);
-    //void reverseCount(double minArea, double maxAre, TBinaryTreeItem* curItem, int& ans);
+    Octagon& GetItemNotLess(double area); // returns an element not less than the given area
+    friend std::ostream& operator << (std::ostream &out, TBinaryTree* tree);
     virtual ~TBinaryTree();
     
 };

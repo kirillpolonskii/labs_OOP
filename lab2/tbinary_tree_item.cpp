@@ -7,16 +7,22 @@ TBinaryTreeItem::TBinaryTreeItem(const Octagon& oct) {
     this->counter = 1;
 }
 
-TBinaryTreeItem::TBinaryTreeItem(const TBinaryTreeItem& other) {
-    this->octagon = other.octagon;
-    this->left = other.left;
-    this->right = other.right;
-    this->counter = other.counter;
+TBinaryTreeItem::TBinaryTreeItem(TBinaryTreeItem& other) {
+    //if (other != nullptr){
+        this->octagon = other.octagon;
+        this->left = other.left;
+        this->right = other.right;
+        this->counter = other.counter;
+    //}
+
 }
 
 Octagon& TBinaryTreeItem::GetOctagon() {
     if (this != nullptr){
         return this->octagon;
+    }
+    else {
+
     }
 }
 
@@ -58,9 +64,12 @@ void TBinaryTreeItem::SetRight(TBinaryTreeItem* tBinTreeItem) {
     }
 }*/
 
-void TBinaryTreeItem::IncCounter() {
-    if (this != nullptr){
-        ++counter;
+std::ostream& operator << (std::ostream& out, TBinaryTreeItem* treeItem){
+    if (treeItem != nullptr){
+        out << treeItem->counter << '*' << treeItem->GetOctagon().GetArea();
+    }
+    else {
+        out << "null";
     }
 }
 

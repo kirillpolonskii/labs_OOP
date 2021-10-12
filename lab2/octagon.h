@@ -22,9 +22,9 @@ public:
         }
         return *this;
     }
-    friend bool operator == (Octagon& oct1, Octagon& oct2); // checked
+    friend bool operator == (const Octagon& oct1, const Octagon& oct2); // checked
     double Area();
-    double GetArea();
+    double GetArea() const;
     double triangleArea(Point p1, Point p2, Point p3);
     int VertexesNumber();
     ~Octagon();

@@ -8,20 +8,21 @@ private:
     Octagon octagon;
     TBinaryTreeItem* left;
     TBinaryTreeItem* right;
-    int counter;
+
 public:
     TBinaryTreeItem(const Octagon& oct);
-    TBinaryTreeItem(const TBinaryTreeItem& other);
+    TBinaryTreeItem(TBinaryTreeItem& other);
     Octagon& GetOctagon();
     void SetOctagon(const Octagon& oct);
     TBinaryTreeItem* GetLeft();
     void SetLeft(TBinaryTreeItem* tBinTreeItem);
     TBinaryTreeItem* GetRight();
     void SetRight(TBinaryTreeItem* tBinTreeItem);
-    //double GetArea();
-    void IncCounter();
+    friend std::ostream& operator << (std::ostream& out, TBinaryTreeItem* treeItem);
     virtual ~TBinaryTreeItem();
 
+    int counter;
+    static Octagon& NULL_OCT;
 };
 
 

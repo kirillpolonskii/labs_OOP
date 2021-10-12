@@ -24,6 +24,6 @@ double Point::dist(const Point& other){
     return sqrt(dx * dx + dy * dy);
 }
 
-bool operator == (Point& p1, Point& p2){
+bool operator == (const Point& p1, const Point& p2){
     return (p1.x == p2.x && p1.y == p2.y);
 }
