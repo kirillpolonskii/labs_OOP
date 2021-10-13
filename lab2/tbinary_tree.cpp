@@ -2,7 +2,9 @@
 #include "string"
 
 TBinaryTree::TBinaryTree() {
-    root = nullptr;
+    this->root = nullptr;
+    std::cout << "In TBTree: in constructor before NULL_OCT\n";
+    NULL_OCT = new Octagon();
 }
 
 /*void recursiveCopying(TBinaryTreeItem* curItem, TBinaryTreeItem* otherItem){
@@ -13,30 +15,36 @@ TBinaryTree::TBinaryTree() {
 }*/
 
 TBinaryTree::TBinaryTree(TBinaryTree& otherBinTree) : TBinaryTree(){
-    root = new TBinaryTreeItem(*otherBinTree.root);
+    this->root = new TBinaryTreeItem(*otherBinTree.root);
 }
 
 void TBinaryTree::Push(const Octagon& oct){
-    if (root == nullptr){
-        root = new TBinaryTreeItem(oct);
+    std::cout << "Enter Push\n";
+    if (this->root == nullptr){
+        std::cout << "In Push: in root == nullptr before root = new\nroot = ";
+        std::cout << root << std::endl;
+        this->root = new TBinaryTreeItem(oct);
+        std::cout << "In Push: in root == nullptr after root = new\n";
     }
-    else if (root->GetOctagon() == oct){
-        ++root->counter;
+    else if (this->root->GetOctagon() == oct){
+        ++this->root->counter;
     }
     else{
-        TBinaryTreeItem* parent = root;
+        TBinaryTreeItem* parent = this->root;
         TBinaryTreeItem* curItem;
         bool childInLeft = true;
         if (oct.GetArea() < parent->GetOctagon().GetArea()) {
-            curItem = root->GetLeft();
+            curItem = this->root->GetLeft();
         }
         else {
-            curItem = root->GetRight();
+            curItem = this->root->GetRight();
             childInLeft = false;
         }
+        std::cout << "In Push: before while\n";
         while (curItem != nullptr){ // while we are not in needed place in tree
             if (curItem->GetOctagon() == oct){ // if all points are same
                 ++curItem->counter;
+                return;
             }
             else { // compare with area
                 if (oct.GetArea() < curItem->GetOctagon().GetArea()){ // go to left child
@@ -51,6 +59,7 @@ void TBinaryTree::Push(const Octagon& oct){
                 }
             }
         }
+        std::cout << "In Push: after while\n";
         curItem = new TBinaryTreeItem(oct);
         if (childInLeft){ // set the pointers
             parent->SetLeft(curItem);
@@ -59,7 +68,7 @@ void TBinaryTree::Push(const Octagon& oct){
             parent->SetRight(curItem);
         }
     }
-
+    std::cout << "Left Push\n";
 }
 
 void TBinaryTree::Pop(const Octagon& oct){
@@ -199,7 +208,7 @@ Octagon& TBinaryTree::GetItemNotLess(double area) {
             curItem = curItem->GetRight();
         }
     }
-    return TBinaryTreeItem::NULL_OCT;
+    return *NULL_OCT;
 
 }
 
@@ -209,18 +218,30 @@ void recursivePrint(TBinaryTreeItem* curItem, bool isLeftChild, int& closeBracke
         if (curItem->GetLeft() != nullptr || curItem->GetRight() != nullptr){
             resStr += ": [";
         }
+        //if (curItem->GetRight() == nullptr){
+            ++closeBracketAmount;
+        //}
         recursivePrint(curItem->GetLeft(), true, closeBracketAmount, resStr);
-        if (curItem->GetRight() != nullptr){
+        if (curItem->GetRight() == nullptr && curItem->GetLeft() != nullptr){
+            while (closeBracketAmount > 0){
+                resStr += "]";
+                --closeBracketAmount;
+            }
+        }
+        if (curItem->GetLeft() != nullptr && curItem->GetRight() != nullptr){
             resStr += ", ";
         }
         ++closeBracketAmount;
+
         recursivePrint(curItem->GetRight(), false, closeBracketAmount, resStr);
-        while (closeBracketAmount > 0){
-            resStr += "]";
-            --closeBracketAmount;
+        if (!isLeftChild || (curItem->GetLeft() != nullptr || curItem->GetRight() != nullptr)) {
+            while (closeBracketAmount > 0) {
+                resStr += "]";
+                --closeBracketAmount;
+            }
         }
     }
-    else if (!isLeftChild){
+    else {
         --closeBracketAmount;
     }
 }
@@ -230,13 +251,20 @@ std::ostream& operator << (std::ostream& out, TBinaryTree* tree){
         out << "null" << std::endl;
     }
     else if (tree->root == nullptr){
-        out << '\n';
+        out << "Empty\n";
     }
     else{
         std::string resStr;
         int closeBracketAmount = 0;
+        std::cout << "In TBTree: in << before recPrint\n";
         recursivePrint(tree->root, true, closeBracketAmount, resStr);
+        out << resStr << std::endl;
     }
+    return out;
+}
+
+TBinaryTreeItem* TBinaryTree::GetRoot(){
+    return root;
 }
 
 TBinaryTree::~TBinaryTree() {

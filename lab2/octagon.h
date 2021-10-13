@@ -23,10 +23,10 @@ public:
         return *this;
     }
     friend bool operator == (const Octagon& oct1, const Octagon& oct2); // checked
-    double Area();
-    double GetArea() const;
-    double triangleArea(Point p1, Point p2, Point p3);
-    int VertexesNumber();
+    double Area(); // checked
+    double GetArea() const; // checked
+    double triangleArea(Point p1, Point p2, Point p3); // checked
+    int VertexesNumber(); // checked
     ~Octagon();
 
     static const int VERTICES_NUM = 8;

@@ -1,6 +1,6 @@
 #include "octagon.h"
 // перед написанием контейнера протестирую каждую функцию
-// tested
+// checked
 Octagon::Octagon(){
     std::cout << "Empty constructor was called\n";
     std::cout << "-----" << std::endl;
@@ -16,7 +16,8 @@ std::istream& operator >> (std::istream& is, Octagon& oct){
     for (int i = 0; i < 8; ++i){
         is >> oct.points[i];
     }
-    //std::cout << "Out of >>\n";
+    oct.area = oct.Area();
+    std::cout << "Out of >>\n";
     return is;
 }
 

@@ -6,16 +6,18 @@
 class TBinaryTree {
 private:
     TBinaryTreeItem* root;
+    Octagon* NULL_OCT;
 public:
-    TBinaryTree();
+    TBinaryTree(); // checked
     TBinaryTree(TBinaryTree& otherBinTree);
-    void Push(const Octagon& oct);
+    void Push(const Octagon& oct); // checked
     void Pop(const Octagon& oct);
     void Clear();
-    bool Empty();
+    bool Empty(); // checked
     int  Count(double minArea, double maxArea);
     Octagon& GetItemNotLess(double area); // returns an element not less than the given area
-    friend std::ostream& operator << (std::ostream &out, TBinaryTree* tree);
+    friend std::ostream& operator << (std::ostream &out, TBinaryTree* tree); // checked 2/3
+    TBinaryTreeItem* GetRoot();
     virtual ~TBinaryTree();
     
 };

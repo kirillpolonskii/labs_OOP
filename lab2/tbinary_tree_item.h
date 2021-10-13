@@ -10,19 +10,18 @@ private:
     TBinaryTreeItem* right;
 
 public:
-    TBinaryTreeItem(const Octagon& oct);
+    TBinaryTreeItem(const Octagon& oct); // checked
     TBinaryTreeItem(TBinaryTreeItem& other);
-    Octagon& GetOctagon();
+    Octagon& GetOctagon(); // checked
     void SetOctagon(const Octagon& oct);
-    TBinaryTreeItem* GetLeft();
-    void SetLeft(TBinaryTreeItem* tBinTreeItem);
-    TBinaryTreeItem* GetRight();
-    void SetRight(TBinaryTreeItem* tBinTreeItem);
+    TBinaryTreeItem* GetLeft(); // checked
+    void SetLeft(TBinaryTreeItem* tBinTreeItem); // checked
+    TBinaryTreeItem* GetRight(); // checked
+    void SetRight(TBinaryTreeItem* tBinTreeItem); // checked
     friend std::ostream& operator << (std::ostream& out, TBinaryTreeItem* treeItem);
     virtual ~TBinaryTreeItem();
 
     int counter;
-    static Octagon& NULL_OCT;
 };
 
 
