@@ -79,7 +79,7 @@ int main() {
                 break;
             }
             case 6:{
-                TBinaryTree* otherTree(tree);
+                TBinaryTree* otherTree = new TBinaryTree(*tree);
                 std::cout << "Copied: " << otherTree;
                 delete otherTree;
                 break;

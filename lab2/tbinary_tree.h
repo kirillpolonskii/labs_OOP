@@ -6,7 +6,6 @@
 class TBinaryTree {
 private:
     TBinaryTreeItem* root;
-    Octagon* NULL_OCT;
 public:
     TBinaryTree(); // checked
     TBinaryTree(TBinaryTree& otherBinTree); // checked

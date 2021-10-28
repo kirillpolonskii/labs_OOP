@@ -8,12 +8,10 @@ TBinaryTreeItem::TBinaryTreeItem(const Octagon& oct) {
 }
 
 TBinaryTreeItem::TBinaryTreeItem(TBinaryTreeItem& other) {
-    //if (other != nullptr){
-        this->octagon = other.octagon;
-        this->left = other.left;
-        this->right = other.right;
-        this->counter = other.counter;
-    //}
+    this->octagon = other.octagon;
+    this->left = other.left;
+    this->right = other.right;
+    this->counter = other.counter;
 
 }
 
@@ -53,12 +51,6 @@ void TBinaryTreeItem::SetRight(TBinaryTreeItem* tBinTreeItem) {
     }
 }
 
-/*double TBinaryTreeItem::GetArea(){
-    if (this != nullptr){
-        return octagon.GetArea();
-    }
-}*/
-
 std::ostream& operator << (std::ostream& out, TBinaryTreeItem* treeItem){
     if (treeItem != nullptr){
         out << treeItem->counter << '*' << std::setprecision(5) << treeItem->GetOctagon().GetArea();
@@ -70,7 +62,5 @@ std::ostream& operator << (std::ostream& out, TBinaryTreeItem* treeItem){
 }
 
 TBinaryTreeItem::~TBinaryTreeItem() {
-    //delete this->left;
-    //delete this->right;
-    std::cout << "Destructor TBinaryTreeItem was called\n";
+    //std::cout << "Destructor TBinaryTreeItem was called\n";
 }
