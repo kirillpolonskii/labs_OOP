@@ -3,6 +3,7 @@
 
 #include "figure.h"
 #include <vector>
+#include <exception>
 
 class Octagon : public Figure{
 private:
@@ -17,6 +18,7 @@ public:
         for (int i = 0; i < 8; ++i){
             this->points[i] = copiedOct.points[i];
         }
+        this->area = 0;
         for (int i = 1; i < 7; ++i){
             this->area += Octagon::triangleArea(copiedOct.points[0], copiedOct.points[i], copiedOct.points[i + 1]);
         }

@@ -9,14 +9,14 @@ private:
     Octagon* NULL_OCT;
 public:
     TBinaryTree(); // checked
-    TBinaryTree(TBinaryTree& otherBinTree);
+    TBinaryTree(TBinaryTree& otherBinTree); // checked
     void Push(const Octagon& oct); // checked
-    void Pop(const Octagon& oct);
-    void Clear();
+    void Pop(const Octagon& oct); // added throw, checked
+    void Clear(); // checked
     bool Empty(); // checked
-    int  Count(double minArea, double maxArea);
-    Octagon& GetItemNotLess(double area); // returns an element not less than the given area
-    friend std::ostream& operator << (std::ostream &out, TBinaryTree* tree); // checked 2/3
+    int Count(const Octagon& octagon); // rewrote, checked
+    Octagon& GetItemNotLess(double area); // rewrote with throw, checked
+    friend std::ostream& operator << (std::ostream &out, TBinaryTree* tree); // checked
     TBinaryTreeItem* GetRoot();
     virtual ~TBinaryTree();
     

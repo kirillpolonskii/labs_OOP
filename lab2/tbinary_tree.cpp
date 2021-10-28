@@ -3,19 +3,31 @@
 
 TBinaryTree::TBinaryTree() {
     this->root = nullptr;
-    std::cout << "In TBTree: in constructor before NULL_OCT\n";
+    //std::cout << "In TBTree: in constructor before NULL_OCT\n";
     NULL_OCT = new Octagon();
 }
 
-/*void recursiveCopying(TBinaryTreeItem* curItem, TBinaryTreeItem* otherItem){
-    if (otherItem != nullptr){
+void recursiveCopying(TBinaryTreeItem* parItem, TBinaryTreeItem* curItem, TBinaryTreeItem* otherItem, bool isLeftChild){
+    // здесь нужно не только создать новые айтемы, но и установить связи между ними,
+    // иначе изменения в дереве, созданном при копировании, будут затрагивать и дерево-источник.
+    // поэтому, буду передавать в этот метод и родителя, и текущего айтема
+    if (otherItem != nullptr){ // если есть откуда копировать
         curItem = new TBinaryTreeItem(*otherItem);
-        recursiveCopying(cur)
+        if (isLeftChild){
+            parItem->SetLeft(curItem);
+        }
+        else{
+            parItem->SetRight(curItem);
+        }
+        recursiveCopying(curItem, curItem->GetLeft(), otherItem->GetLeft(), true);
+        recursiveCopying(curItem, curItem->GetRight(), otherItem->GetRight(), false);
     }
-}*/
+}
 
 TBinaryTree::TBinaryTree(TBinaryTree& otherBinTree) : TBinaryTree(){
     this->root = new TBinaryTreeItem(*otherBinTree.root);
+    recursiveCopying(this->root, this->root->GetLeft(), otherBinTree.root->GetLeft(), true);
+    recursiveCopying(this->root, this->root->GetRight(), otherBinTree.root->GetRight(), false);
 }
 
 void TBinaryTree::Push(const Octagon& oct){
@@ -72,20 +84,36 @@ void TBinaryTree::Push(const Octagon& oct){
 }
 
 void TBinaryTree::Pop(const Octagon& oct){
+    std::cout << "Enter pop with oct which area = ";
+    std::cout << oct.GetArea() << std::endl;
     TBinaryTreeItem* deletedItem = root;
-    if (root != nullptr) {
+    if (root != nullptr) { // if tree isn't empty
+        std::cout << "POP: Tree is not empty\n";
+        TBinaryTreeItem *parentDelItem = root;
+        bool isLeftLeaf = true; // will need this var in delete leaf
         while (deletedItem != nullptr && !(deletedItem->GetOctagon() == oct)) {
+            if (deletedItem != root){
+                parentDelItem = deletedItem;
+            }
             if (oct.GetArea() < deletedItem->GetOctagon().GetArea()) {
                 deletedItem = deletedItem->GetLeft();
+                isLeftLeaf = true;
             } else {
                 deletedItem = deletedItem->GetRight();
+                isLeftLeaf = false;
             }
+
         }
         if (deletedItem == nullptr) {
-            std::cout << "There isn't such octagon in tree.\n";
+            std::cout << "POP: deleted item (==null)=\n"; std::cout << deletedItem; std::cout << std::endl;
+            throw std::invalid_argument("There isn't such octagon in tree!");
         }
-        else { //
-            if (deletedItem->GetLeft() != nullptr){
+        if (deletedItem->counter > 1){
+            --deletedItem->counter;
+            return;
+        }
+        else {
+            if (deletedItem->GetLeft() != nullptr){ // check left subtree
                 TBinaryTreeItem* largestChild = deletedItem->GetLeft();
                 if (largestChild->GetRight() != nullptr) { // if he isn't the largest child himself
                     TBinaryTreeItem *parent = largestChild;
@@ -103,9 +131,9 @@ void TBinaryTree::Pop(const Octagon& oct){
                     // in fact, we don't delete deletedItem, we delete the largest child and put his values to deletedItem
                     parent->SetRight(largestChild->GetLeft());
                     delete largestChild;
-
+                    largestChild = nullptr;
                 }
-                else{ // if he is the largest child himself
+                else{ // if he is the largest child himself. Parent is unnecessary
                     //int tmpCounter;
                     //tmpCounter = deletedItem->counter;
                     deletedItem->counter = largestChild->counter;
@@ -113,10 +141,11 @@ void TBinaryTree::Pop(const Octagon& oct){
                     deletedItem->SetOctagon(largestChild->GetOctagon());
                     deletedItem->SetLeft(largestChild->GetLeft());
                     delete largestChild;
+                    largestChild = nullptr;
                 }
             }
-            else if (deletedItem->GetRight() != nullptr){ // if there is right child
-                TBinaryTreeItem* leastChild = deletedItem->GetLeft();
+            else if (deletedItem->GetRight() != nullptr){ // check right subtree
+                TBinaryTreeItem* leastChild = deletedItem->GetRight();
                 if (leastChild->GetLeft() != nullptr) { // if he isn't the least child himself
                     TBinaryTreeItem *parent = leastChild;
                     leastChild = parent->GetLeft();
@@ -133,7 +162,7 @@ void TBinaryTree::Pop(const Octagon& oct){
                     // in fact, we don't delete deletedItem, we delete the largest child and put his values to deletedItem
                     parent->SetLeft(leastChild->GetRight());
                     delete leastChild;
-
+                    leastChild = nullptr;
                 }
                 else{ // if he is the least child himself
                     //int tmpCounter;
@@ -143,34 +172,47 @@ void TBinaryTree::Pop(const Octagon& oct){
                     deletedItem->SetOctagon(leastChild->GetOctagon());
                     deletedItem->SetRight(leastChild->GetRight());
                     delete leastChild;
+                    leastChild = nullptr;
                 }
             }
             else{ // if deleted item is a leaf
-                delete deletedItem;
-                deletedItem = nullptr;
+                std::cout << "deleted item is a leaf with area = "; std::cout << deletedItem->GetOctagon().GetArea() << "\n";
+                if (deletedItem == root) {
+                    root = nullptr;
+                    delete root;
+                }
+                else {
+                    deletedItem = nullptr;
+                    delete deletedItem;
+                    if (isLeftLeaf)
+                        parentDelItem->SetLeft(nullptr);
+                    else
+                        parentDelItem->SetRight(nullptr);
+                    //deletedItem = nullptr;
+                }
             }
         }
     }
     else {
         std::cout << "Tree is empty!\n";
     }
-
+    std::cout << "Out of pop\n";
 }
 
-void recursiveCount(double minArea, double maxArea, TBinaryTreeItem* curItem, int& ans){
+void recursiveCount(const Octagon& octagon, TBinaryTreeItem* curItem, int& ans){
     if (curItem != nullptr){
-        recursiveCount(minArea, maxArea, curItem->GetLeft(), ans);
-        recursiveCount(minArea, maxArea, curItem->GetRight(), ans);
-        if (minArea <= curItem->GetOctagon().GetArea() && curItem->GetOctagon().GetArea() < maxArea){
-            ++ans;
+        recursiveCount(octagon, curItem->GetLeft(), ans);
+        recursiveCount(octagon, curItem->GetRight(), ans);
+        if (curItem->GetOctagon() == octagon){
+            ans += curItem->counter;
         }
     }
 }
 
-int TBinaryTree::Count(double minArea, double maxArea){
+int TBinaryTree::Count(const Octagon& octagon){
     int ans = 0;
     //TBinaryTreeItem* curItem = root;
-    recursiveCount(minArea, maxArea, root, ans);
+    recursiveCount(octagon, root, ans);
     return ans;
 }
 
@@ -190,7 +232,8 @@ void recursiveClear(TBinaryTreeItem* curItem){
 
 void TBinaryTree::Clear(){
     recursiveClear(root);
-    delete root;
+    std::cout << "CLEAR: out of recClear\n";
+    //delete root;
     root = nullptr;
 }
 
@@ -208,38 +251,27 @@ Octagon& TBinaryTree::GetItemNotLess(double area) {
             curItem = curItem->GetRight();
         }
     }
-    return *NULL_OCT;
+    throw std::out_of_range("Passed area is bigger then maximum in tree!");
 
 }
 
 void recursivePrint(TBinaryTreeItem* curItem, bool isLeftChild, int& closeBracketAmount, std::string& resStr){
+    //std::cout << "Enter recPrint\n";
     if (curItem != nullptr){
+        //std::cout << "In recPrint curItem = "; std::cout << curItem;
         resStr += std::to_string(curItem->counter) + "*" + std::to_string(curItem->GetOctagon().GetArea());
         if (curItem->GetLeft() != nullptr || curItem->GetRight() != nullptr){
             resStr += ": [";
         }
-        //if (curItem->GetRight() == nullptr){
-            ++closeBracketAmount;
-        //}
+
         recursivePrint(curItem->GetLeft(), true, closeBracketAmount, resStr);
-        if (curItem->GetRight() == nullptr && curItem->GetLeft() != nullptr){
-            while (closeBracketAmount > 0){
-                resStr += "]";
-                --closeBracketAmount;
-            }
-        }
+
         if (curItem->GetLeft() != nullptr && curItem->GetRight() != nullptr){
             resStr += ", ";
         }
-        ++closeBracketAmount;
-
         recursivePrint(curItem->GetRight(), false, closeBracketAmount, resStr);
-        if (!isLeftChild || (curItem->GetLeft() != nullptr || curItem->GetRight() != nullptr)) {
-            while (closeBracketAmount > 0) {
-                resStr += "]";
-                --closeBracketAmount;
-            }
-        }
+        if (curItem->GetLeft() != nullptr || curItem->GetRight() != nullptr)
+            resStr += "]";
     }
     else {
         --closeBracketAmount;
@@ -248,10 +280,10 @@ void recursivePrint(TBinaryTreeItem* curItem, bool isLeftChild, int& closeBracke
 
 std::ostream& operator << (std::ostream& out, TBinaryTree* tree){
     if (tree == nullptr){
-        out << "null" << std::endl;
+        out << "Tree is null" << std::endl;
     }
     else if (tree->root == nullptr){
-        out << "Empty\n";
+        out << "Tree is empty\n";
     }
     else{
         std::string resStr;
@@ -268,6 +300,8 @@ TBinaryTreeItem* TBinaryTree::GetRoot(){
 }
 
 TBinaryTree::~TBinaryTree() {
+    std::cout << "Destructor TBinaryTree was called\n";
+    Clear();
 
 }
 

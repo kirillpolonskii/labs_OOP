@@ -18,7 +18,7 @@ public:
     void SetLeft(TBinaryTreeItem* tBinTreeItem); // checked
     TBinaryTreeItem* GetRight(); // checked
     void SetRight(TBinaryTreeItem* tBinTreeItem); // checked
-    friend std::ostream& operator << (std::ostream& out, TBinaryTreeItem* treeItem);
+    friend std::ostream& operator << (std::ostream& out, TBinaryTreeItem* treeItem); // checked
     virtual ~TBinaryTreeItem();
 
     int counter;

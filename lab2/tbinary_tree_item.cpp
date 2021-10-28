@@ -1,6 +1,6 @@
 #include "tbinary_tree_item.h"
 TBinaryTreeItem::TBinaryTreeItem(const Octagon& oct) {
-    std::cout << "In TBItem constructor\n";
+    //std::cout << "In TBItem constructor\n";
     this->octagon = oct;
     this->left = nullptr;
     this->right = nullptr;
@@ -61,7 +61,7 @@ void TBinaryTreeItem::SetRight(TBinaryTreeItem* tBinTreeItem) {
 
 std::ostream& operator << (std::ostream& out, TBinaryTreeItem* treeItem){
     if (treeItem != nullptr){
-        out << treeItem->counter << '*' << treeItem->GetOctagon().GetArea();
+        out << treeItem->counter << '*' << std::setprecision(5) << treeItem->GetOctagon().GetArea();
     }
     else {
         out << "null";
