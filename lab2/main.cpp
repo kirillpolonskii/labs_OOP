@@ -27,6 +27,7 @@ int main() {
 
         switch (command) {
             case 0:{
+                delete tree;
                 return 0;
             }
             case 1:{
