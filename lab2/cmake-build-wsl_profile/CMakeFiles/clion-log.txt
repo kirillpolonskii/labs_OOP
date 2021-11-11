@@ -1,1 +1,0 @@
-CMake executable not found: \\wsl$\Ubuntu-18.04\usr\bin\cmake Configure Disable profile
