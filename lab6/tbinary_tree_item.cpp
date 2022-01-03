@@ -14,8 +14,10 @@ TBinaryTreeItem<T>::TBinaryTreeItem(std::shared_ptr<TBinaryTreeItem<T>>& other) 
     this->left = other->left;
     this->right = other->right;
     this->counter = other->counter;
-
 }
+
+template <class T>
+TAllocationBlock TBinaryTreeItem<T>::stackitem_allocator(sizeof(TBinaryTreeItem<T>), 100);
 
 template<class T>
 std::shared_ptr<T> TBinaryTreeItem<T>::GetData() {
@@ -68,6 +70,16 @@ std::ostream& operator << (std::ostream& out, std::shared_ptr<TBinaryTreeItem<T>
         out << "null";
     }
     return out;
+}
+
+template <class T>
+void* TBinaryTreeItem<T>::operator new(size_t size) {
+    return stackitem_allocator.allocate();
+}
+
+template <class T>
+void TBinaryTreeItem<T>::operator delete(void* p) {
+    stackitem_allocator.deallocate(p);
 }
 
 template<class T>

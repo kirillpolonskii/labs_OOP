@@ -2,12 +2,14 @@
 #define LAB5_TBINARY_TREE_ITEM_H
 
 #include "octagon.h" // checked
+#include "tallocation_block.h"
 
 template<class T> class TBinaryTreeItem {
 private:
     std::shared_ptr<T> data;
     std::shared_ptr<TBinaryTreeItem<T>> left;
     std::shared_ptr<TBinaryTreeItem<T>> right;
+    static TAllocationBlock stackitem_allocator;
 
 public:
     TBinaryTreeItem<T>(const std::shared_ptr<T>& data);
@@ -20,6 +22,9 @@ public:
     void SetRight(std::shared_ptr<TBinaryTreeItem<T>> tBinTreeItem);
     template<class A> friend std::ostream& operator << (std::ostream& out, std::shared_ptr<TBinaryTreeItem<A>> treeItem);
     virtual ~TBinaryTreeItem();
+
+    void* operator new(size_t size);
+    void operator delete(void* p);
 
     int counter;
 };

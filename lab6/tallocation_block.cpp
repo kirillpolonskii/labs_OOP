@@ -23,7 +23,7 @@ void* TAllocationBlock::allocate() {
         std::cout << " of " << _count << std::endl;
 
     } else {
-        std::cout << "TAllocationBlock: No memory exception :-)" << std::endl;
+        std::cout << "TAllocationBlock: No memory" << std::endl;
     }
 
     return result;
